@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_tipo'); 
             $table->string('placa'); 
+            $table->string('modelo'); 
             $table->string('capacidad'); 
             $table->unsignedBigInteger('id_estado'); 
-          
+            $table->decimal('consumo_de_combustible'); 
             $table->foreign('id_tipo')->references('id')->on('vehicle_types')->onDelete('cascade');
-            $table->foreign('id_estado')->references('id')->on('vehicle_status')->onDelete('cascade');
+            $table->foreign('id_estado')->references('id')->on('vehicle_statuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

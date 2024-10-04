@@ -15,4 +15,10 @@ class document_type extends Model
         'name',
     ];
 
+    public function User()
+    {
+        return $this->hasMany(User::class, 'id_document_type');
+    }
+
+
 }

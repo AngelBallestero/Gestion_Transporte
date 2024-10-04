@@ -148,7 +148,7 @@
                 <a href="">¿Quiénes Somos?</a>
                 <a href="{{ route('users.index') }}">Servicio</a>
                 <a href="{{ route('users.create') }}">Regístrate</a>
-                <a href="{{ route('users.crearvehicle') }}">Ingresar</a>
+                <a href="{{ route('vehicles.create') }}">Ingresar</a>
             </nav>
         </header>
 

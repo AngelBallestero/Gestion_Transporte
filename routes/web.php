@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AutenticationController;
+use App\Http\Controllers\VehicleController;
+use App\Models\Vehicle;
 use app\Models\User;
 
 /*
@@ -28,9 +30,12 @@ Route::post('login', [AutenticationController::class, 'login'])->name('users.log
 Route::get('index', [AutenticationController::class, 'index'])->name('users.index');
 Route::post('store', [AutenticationController::class, 'store'])->name('users.store');
 Route::get('create', [AutenticationController::class, 'create'])->name('users.create');
-Route::post('crearvehicle', [AutenticationController::class, 'crearvehicle'])->name('users.crearvehicle');
-Route::get('tipovehiculo', [AutenticationController::class, 'tipovehiculo'])->name('users.tipovehiculo');
-Route::get('estadovehiculo', [AutenticationController::class, 'estadovehiculo'])->name('users.estadovehiculo');
+
+Route::get('vehicles/create', [VehicleController::class, 'create'])->name('vehicles.create');
+Route::post('vehicles/store', [VehicleController::class, 'store'])->name('vehicles.store');
+Route::get('vehicles/index',[VehicleController::class, 'index']);
+
+
 
 
 
