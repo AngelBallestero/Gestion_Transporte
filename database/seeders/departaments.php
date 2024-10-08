@@ -4,21 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\VehicleType;
+use App\Models\Departament;
 
-class vehicletypes extends Seeder
+class departaments extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        VehicleType::create([
-        'name'=>'honda',
-        ]);
-        VehicleType::create([
-            'name'=>'suzuki',
-        ]);
-        
+    Departament::create([
+    'name_departament' => 'Cesar',
+    ]);
     }
 }

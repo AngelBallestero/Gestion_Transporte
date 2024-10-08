@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use app\Models\Document_type;
-use app\Models\User;
+use app\Models\Document_types;
+use App\Models\Customer;
 
 class document_type extends Model
 {
@@ -15,9 +15,9 @@ class document_type extends Model
         'name',
     ];
 
-    public function User()
+    public function Customer()
     {
-        return $this->hasMany(User::class, 'id_document_type');
+        return $this->hasMany(Customer::class, 'id_document_type');
     }
 
 

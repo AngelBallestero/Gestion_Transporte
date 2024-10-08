@@ -146,36 +146,36 @@
             </a>
             <nav>
                 <a href="">¿Quiénes Somos?</a>
-                <a href="{{ route('users.index') }}">Servicio</a>
-                <a href="{{ route('users.create') }}">Regístrate</a>
+                <a href="{{ route('customers.index') }}">Servicio</a>
+                <a href="{{ route('customers.create') }}">Regístrate</a>
                 <a href="{{ route('vehicles.create') }}">Ingresar</a>
             </nav>
         </header>
 
-        <form action="{{ route('users.login') }}" method="POST">
+        <form action="{{ route('customers.login') }}" method="POST">
             @csrf 
             <circle>      
-                 <center>
-                      <img class="imglogin" src="{{ asset('Img/logo.png') }}" alt="Logo de inicio de sesión">
-                 </center>
+                <center>
+                    <img class="imglogin" src="{{ asset('Img/logo.png') }}" alt="Logo de inicio de sesión">
+                </center>
             </circle>
             <br>
             <img class="imagen" src="{{ asset('Img/nombres.png') }}" alt="Campo de nombre">
             
-           
+        
             <input type="text" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="passwords" required>
 
-          
+        
             <center>
                 <a style="margin-top: 50px" href="">¿Olvidaste tu contraseña?</a>
             </center>
             <br>
             <center>
-             
+            
                 <button type="submit">Iniciar Sesión</button>
                 <br>
-               
+            
             </center>
         </form>
         

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Models;
-use App\Models\User;
+use App\Models\Departament;
 
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +15,14 @@ class City extends Model
         'name_city',
     ];
 
-    public function User()
+    public function Customer()
     {
-        return $this->hasMany(User::class, 'id_city');
+        return $this->hasMany(Customer::class, 'id_city');
     }
+    
+    public function Departament()
+    {
+        return $this->belongsTo(Departament::class, 'id_departament');
+    }
+
 }

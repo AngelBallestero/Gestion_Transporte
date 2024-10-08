@@ -19,6 +19,6 @@ class vehiclesstatus extends Seeder
         VehicleStatus::create([
             'name'=>'Aceptable',
         ]);
-           
+        
     }
 }

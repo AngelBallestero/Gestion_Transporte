@@ -12,7 +12,7 @@ class VehicleController extends Controller
 public function index(){  
 
     $vehicle = Vehicle::all();  
-    return response()->json(['message' => $vehiculo], 404);  
+    return response()->json(['message' => $vehicle], 404);  
 
 }
 
@@ -24,7 +24,7 @@ public function create(){
 }
 
 public function store(Request $request){
-  
+
     $request->validate([
         'id_tipo' =>'required|string|',
         'placa' => 'required|string|',
@@ -44,9 +44,9 @@ public function store(Request $request){
         $verhicle->save();
 
         //  return response()->json(['message' => 'Usuario registrado exitosamente'], 404);
-         echo '<script type="text/javascript">'; echo 'alert("Usuario registrado exitosamente")'; echo '</script>';
-         return view('login');
-          
+        echo '<script type="text/javascript">'; echo 'alert("Vehiculo registrado exitosamente")'; echo '</script>';
+        return view('login');
+        
     
 }
 }

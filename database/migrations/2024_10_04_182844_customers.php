@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     { 
-        Schema::create('users', function (Blueprint $table){
+        Schema::create('customers', function (Blueprint $table){
         $table->id();    
         $table->unsignedBigInteger('id_document_type');
         $table->unsignedBigInteger('document');
@@ -23,8 +23,8 @@ return new class extends Migration
         $table->unsignedBigInteger('id_city');
         $table->string('address');
         $table->string('neighborhood');
-        $table->unsignedBigInteger('password'); 
-        $table->unsignedBigInteger('confirm_password'); 
+        $table->string('password'); 
+        $table->string('confirm_password'); 
         $table->timestamps(); 
         
         $table->foreign('id_document_type')->references('id')->on('document_types')->onDelete('cascade');

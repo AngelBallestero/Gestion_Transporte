@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <style>
-   body {
+body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -108,12 +108,12 @@
         </a>
         <nav>
             <a href="">¿Quiénes Somos?</a>
-            <a href="{{ route('users.index') }}">Servicio</a>
-            <a href="{{ route('users.create') }}">Regístrate</a>
+            <a href="{{ route('customers.index') }}">Servicio</a>
+            <a href="{{ route('customers.create') }}">Regístrate</a>
             <a href="{{ route('vehicles.create') }}">Ingresar</a>
         </nav>
     </header>
-  <form action="{{ route('vehicles.store') }}" method="POST">
+<form action="{{ route('vehicles.store') }}" method="POST">
     @csrf
 
     <label for="placa">Tipo Vehiculo:</label>
@@ -136,9 +136,9 @@
     <label for="capacidad">Estado Vehiculo:</label>
     <select name="id_estado" id="id_estado" required>
         <option value="">Seleccione Estado del vehiculo</option>
-              @foreach($vehicleStatus as $vehicleStatu)
-                 <option value="{{ $vehicleStatu->id }}">{{ $vehicleStatu->name }}</option>
-             @endforeach
+            @foreach($vehicleStatus as $vehicleStatu)
+            <option value="{{ $vehicleStatu->id }}">{{ $vehicleStatu->name }}</option>
+        @endforeach
     </select>
 
     <label for="consumo_de_combustible">Consumo_de_combustible:</label>

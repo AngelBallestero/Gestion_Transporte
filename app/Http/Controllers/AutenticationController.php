@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Document_type;
 use App\Models\Departament;
 use App\Models\City;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
 
@@ -14,22 +14,22 @@ use Illuminate\Support\Facades\Hash;
 class AutenticationController extends Controller
 {
     public function index()
-    {
-        $User = User::all();
-        return response()->json(['message' => $User], 404);  
+    { 
+        $custome = Customer::all();
+        return response()->json(['message' =>  $custome], 404);  
     }
-  
 
-     public function show($id){
-     $User = User::find($id);
-         if ($User) {  
-             return response()->json(User, 200);
-         }
-       
-         return response()->json(['message' => 'User not found'], 404);
-     }
 
-   
+    public function show($id){
+        $custome = Customer::find($id);
+        if ($custome) {  
+            return response()->json($custome, 200);
+        }
+    
+        return response()->json(['message' => 'User not found'], 404);
+    }
+
+
     public function create(){
         $documentTypes = Document_type::all(); 
         $departaments = Departament::all(); 
@@ -41,38 +41,39 @@ class AutenticationController extends Controller
 
     public function store(Request $request)
     {
-            $request->validate([
-                'id_document_type' =>'required|string|',
-                'document' => 'required|string|',
-                'name' => 'required|string|',
-                'last_name' => 'required|string|',
-                'phone' => 'required|string|',
-                'email' => 'required|string|email|max:255|unique:users',
-                'id_departament' => 'require|string|',
-                'id_city' => 'required|string|',
-                'address' => 'required|string|',
-                'neighborhood' => 'required|string|',
-                'password' => 'required|string|min:8', 
-                'confirm_password' => 'required|string|',
-            ]);
+        $request->validate([
+            'id_document_type' => 'required|string',
+            'document' => 'required|string',
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|string|email|max:255|unique:customers',
+            'id_departament' => 'required|string',
+            'id_city' => 'required|string',
+            'address' => 'required|string',
+            'neighborhood' => 'required|string',
+            'password' => 'required|string|min:8', 
+            'confirm_password' => 'required|string',
+        ]);
         
-            $user = new User();
-            $user->id_document_type = $request->id_document_type;
-            $user->document= $request->document;
-            $user->name = $request->name;
-            $user->last_name = $request->last_name;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->departament = $request->departament;
-            $user->city = $request->city;
-            $user->address = $request->address;
-            $user->neighborhood = $request->neighborhood;
-            $user->password = Hash::make($request->password);
-            $user->confirm_password = $request->confirm_password;
-            $user->save();
-     
-         echo '<script type="text/javascript">'; echo 'alert("Usuario registrado exitosamente")'; echo '</script>';
-         return view('login'); 
+        $custome = new Customer();
+        $custome->id_document_type = $request->id_document_type;
+        $custome->document = $request->document;
+        $custome->name = $request->name;
+        $custome->last_name = $request->last_name;
+        $custome->phone = $request->phone;
+        $custome->email = $request->email;
+        $custome->id_departament = $request->id_departament; 
+        $custome->id_city = $request->id_city; 
+        $custome->address = $request->address;
+        $custome->neighborhood = $request->neighborhood;
+        $custome->password = Hash::make($request->password); 
+        $custome->confirm_password = Hash::make($request->confirm_password);
+        $custome->save();
+        
+        echo '<script type="text/javascript">'; echo 'alert("Usuario registrado exitosamente")'; echo '</script>';
+        return view('login'); 
+        
     }
 
     public function login(Request $request)
@@ -89,12 +90,49 @@ class AutenticationController extends Controller
         }
         echo '<script type="text/javascript">'; echo 'alert("credenciales incorrectas")'; echo '</script>';
         return view('login'); 
-    }
+    // // Validar las credenciales
+    // {
     
-    public function datos(){
-        return view('mostrardatos');
-    }  
+
+    //     // Validación de credenciales
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
+    //     ]);
+        
+    //     // Intentar autenticar al usuario
+    //     if (Auth::attempt($credentials)) {
+    //         // Regenerar la sesión
+    //         $request->session()->regenerate();
+        
+    //         // Obtener el usuario autenticado
+    //         $custome = Auth::user();
+        
+    //         // Verificar los roles del usuario
+    //         // if ($user->Role('admin')) {
+    //         //     return redirect()->route('admin.dashboard')->with('success', 'Has iniciado sesión como administrador.');
+    //         // } elseif ($user->Role('conductor')) {
+    //         //     return redirect()->route('conductor.dashboard')->with('success', 'Has iniciado sesión como conductor.');
+    //         // } else {
+    //         //     return redirect()->route('cliente.dashboard')->with('success', 'Has iniciado sesión como cliente.');
+    //         // }
+    //     }
+        
+    //     // Si las credenciales son incorrectas
+    //     return redirect()->route('login')->withErrors(['email' => 'Credenciales incorrectas.']);
+        
 }
 
+    
+    
+
+
+    public function getCities($departmentId)
+{
+    $cities = City::where('id_departament', $departmentId)->get();
+    return response()->json($cities);
+}
+
+}
 
 
