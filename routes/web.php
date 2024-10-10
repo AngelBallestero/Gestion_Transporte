@@ -30,6 +30,7 @@ Route::post('login', [AutenticationController::class, 'login'])->name('customers
 Route::get('index', [AutenticationController::class, 'index'])->name('customers.index');
 Route::post('store', [AutenticationController::class, 'store'])->name('customers.store');
 Route::get('create', [AutenticationController::class, 'create'])->name('customers.create');
+
 Route::get('/cities/{departmentId}', [AutenticationController::class, 'getCities'])->name('customers.getCities');
 
 

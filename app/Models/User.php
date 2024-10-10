@@ -2,22 +2,38 @@
 
 namespace App\Models;
 
-use App\Models\Rol;
+
+use App\Models\Customer;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
     use HasFactory;
-      
+
+    
     protected $fillable = [
-        'user',
+        'email',
+        'name',
+        'last_name',
         'password',
-        'id_rol'
     ];
-    public function rols()
+
+    public function roles()
     {
-        return $this->belongsTo(Rol::class, 'id_rol');
+        return $this->belongsToMany(Role::class, 'rol_users');
+    }
+
+    public function customer()
+    {
+            return $this->hasMany(Customer::class, 'id_user');
+        
+    }
+
+    public function hasRole($roleName)
+    {
+        return $this->roles()->where('name',$roleName)->exists();
     }
 
 }

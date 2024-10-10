@@ -2,21 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Document_type;
-use App\Models\Departament;
 use App\Models\City;
 use App\Models\Customer;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash; 
+use App\Models\Departament;
+use App\Models\Document_type;
+use App\Models\Role;
+use App\Models\User;
+use Database\Seeders\roles;
 
+use function Laravel\Prompts\select;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AutenticationController extends Controller
 {
     public function index()
     { 
-        $custome = Customer::all();
-        return response()->json(['message' =>  $custome], 404);  
+        // $custome = Customer::all();
+        // return response()->json(['message' =>  $custome], 404);  
+
+    
+        
+        $data = Customer::select(
+            'roles.name as Rol',
+            'document_types.name_document',
+            'customers.document',
+            'customers.name',
+            'customers.last_name',
+            'customers.phone',
+            'customers.email',
+            'departaments.name_departament',
+            'cities.name_city'
+        )
+        ->join('document_types', 'customers.id_document_type', '=', 'document_types.id')
+        ->join('departaments', 'customers.id_departament', '=', 'departaments.id')
+        ->join('cities', 'customers.id_city', '=', 'cities.id')
+        ->join('users', 'customers.id_user', '=', 'users.id')
+        ->join('rol_users', 'customers.id_user','=', 'users.id')
+        ->join('roles', 'rol_users.role_id', '=', 'roles.id')
+        ->get();
+    
+
+        return view('mostradatos', compact('data'));
     }
 
 
@@ -42,6 +72,13 @@ class AutenticationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'email' => 'required|string',
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'password' => 'required|string|min:8',
+
+            
+        
             'id_document_type' => 'required|string',
             'document' => 'required|string',
             'name' => 'required|string',
@@ -53,10 +90,21 @@ class AutenticationController extends Controller
             'address' => 'required|string',
             'neighborhood' => 'required|string',
             'password' => 'required|string|min:8', 
-            'confirm_password' => 'required|string',
+            'confirm_password' => 'required|string|same:password',
         ]);
+
+        $user= User::create([
+            'email' => $request->email,
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'password' => Hash::make($request->password),
+
+        ]);
+        $user->roles()->attach(2);
+        
         
         $custome = new Customer();
+        $custome->id_user=$user->id;
         $custome->id_document_type = $request->id_document_type;
         $custome->document = $request->document;
         $custome->name = $request->name;
@@ -68,10 +116,12 @@ class AutenticationController extends Controller
         $custome->address = $request->address;
         $custome->neighborhood = $request->neighborhood;
         $custome->password = Hash::make($request->password); 
-        $custome->confirm_password = Hash::make($request->confirm_password);
+        $custome->confirm_password = Hash::make($request->confirm_password); 
         $custome->save();
         
-        echo '<script type="text/javascript">'; echo 'alert("Usuario registrado exitosamente")'; echo '</script>';
+
+        
+        echo '<script type="text/javascript">'; echo 'alert("Cliente registrado exitosamente")'; echo '</script>';
         return view('login'); 
         
     }

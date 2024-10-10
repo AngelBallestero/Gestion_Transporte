@@ -12,7 +12,7 @@ class document_type extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name_document',
     ];
 
     public function Customer()

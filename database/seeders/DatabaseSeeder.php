@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(vehicletypes::class);
         $this->call(vehiclesstatus::class);
         $this->call(departaments::class);
+        $this->call(roles::class);
     }
 }

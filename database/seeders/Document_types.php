@@ -14,12 +14,17 @@ class Document_types extends Seeder
     public function run(): void
     {
         Document_type::create([
-            'name' => 'Pasaporte',
+            'name_document' => 'Cedula Ciudadania',
         ]);
 
         Document_type::create([
-            'name' => 'DNI',
+            'name_document' => 'Pasaporte',
         ]);
+
+        Document_type::create([
+            'name_document' => 'DNI',
+        ]);
+
 
     }
 }

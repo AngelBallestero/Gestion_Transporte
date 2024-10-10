@@ -13,12 +13,16 @@ return new class extends Migration
     { 
         Schema::create('users', function (Blueprint $table){
             $table->id();
-            $table->string('user');
-            $table->unsignedBigInteger('password');
-            $table->unsignedBigInteger('id_rol');
-            $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade');
+            $table->string('email')->unique();
+            $table->string('name');
+            $table->string('last_name');
+            $table->string('password');
+            $table->timestamps();
         });
+    
+    
     }
+
 
     /**
      * Reverse the migrations.
@@ -27,5 +31,9 @@ return new class extends Migration
     {
     Schema::dropIfExists('users');
     }
+
+      // $table->unsignedBigInteger('id_rol');
+            // $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade');
+            // $table->timestamps();
     
 };

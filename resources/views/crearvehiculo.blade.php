@@ -108,7 +108,7 @@ body {
         </a>
         <nav>
             <a href="">¿Quiénes Somos?</a>
-            <a href="{{ route('customers.index') }}">Servicio</a>
+            {{-- <a href="{{ route('vehicles.index') }}">Servicio</a> --}}
             <a href="{{ route('customers.create') }}">Regístrate</a>
             <a href="{{ route('vehicles.create') }}">Ingresar</a>
         </nav>

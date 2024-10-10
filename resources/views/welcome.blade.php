@@ -119,79 +119,14 @@
         </div>
     @endif
     <br>
-    {{-- <form action="{{ route('users.store') }}" method="POST">
-        
-    <h1>Crear un nuevo Cliente</h1>
-        @csrf
-     
-     
-        <label for="id_document_type">Tipo de Documento:</label>
-        <select name="id_document_type" id="id_document_type" required>
-            <option value="">Seleccione un documento</option>
-            @foreach($documentTypes as $documentType)
-                <option value="{{ $documentType->id }}">{{ $documentType->name }}</option>
-            @endforeach
-        </select>
-
-        <label for="document">Documento:</label>
-        <input type="text" name="document" id="document" value="{{ old('document') }}" required>
-
-        <label for="name">Nombre:</label>
-        <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-
-        <label for="last_name">Apellido:</label>
-        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" required>
-
-        <label for="phone">Telefono:</label>
-        <input type="phone" name="phone" id="phone" value="{{ old('phone') }}" required>
-        
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" value="{{ old('email') }}" required>
-
-        <label for="id_departament">Departamento:</label>
-        <select name="id_departament" id="id_departament" required>
-            <option value="">Seleccione un Departamento</option>
-            @foreach($departaments as $departament)
-                <option value="{{ $departament->id }}">{{ $departament->name_departament }}</option>
-            @endforeach
-        </select>
-
-        <label for="id_city">Ciudad:</label>
-        <select name="id_city" id="id_city" required>
-            <option value="">Seleccione una Ciudad</option>
-            @foreach( $citys as $city)
-                <option value="{{ $city->id }}">{{ $city->name_city }}</option>
-            @endforeach
-        </select>
-
-        <label for="address">Direccion:</label>
-        <input type="text" name="address" id="address" value="{{ old('address') }}" required>
-
-        <label for="neighborhood">Barrio:</label>
-        <input type="text" name="neighborhood" id="neighborhood" value="{{ old('neighborhood') }}" required>
-        
-        <label for="password">Contraseña:</label>
-        <input type="password" name="password" id="password" required>
-
-        <label for="confirm_password">Confirmar Contraseña:</label>
-        <input type="password" name="confirm_password" id="confirm_password" required>
-        
-        <center><button type="submit">Crear Usuario</button></center>
-        --}}
         <form action="{{ route('customers.store') }}" method="POST">
             <h1>Crear un nuevo Cliente</h1>
             @csrf
-            
-            <!-- Campos de formulario -->
-            <!-- ... --> <h1>Crear un nuevo Cliente</h1>
-        @csrf
-     
-     
         <label for="id_document_type">Tipo de Documento:</label>
         <select name="id_document_type" id="id_document_type" required>
             <option value="">Seleccione un documento</option>
             @foreach($documentTypes as $documentType)
-                <option value="{{ $documentType->id }}">{{ $documentType->name }}</option>
+                <option value="{{ $documentType->id }}">{{ $documentType->name_document }}</option>
             @endforeach
         </select>
 
